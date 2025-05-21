@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مكتبات كلية التربية النوعية</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- إضافة خط Cairo من Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('/static/image2.png'); /* إعادة الخلفية الأصلية */
+      background-size: 100% 100%; /* تكبير الصورة بشكل بسيط */
+      background-position: center; /* توسيط الصورة */
+      background-attachment: fixed; /* لجعل الصورة ثابتة عند التمرير */
+      height: 100vh; /* لضبط ارتفاع الصفحة ليغطي الشاشة بالكامل */
+      margin: 0; /* إزالة الهوامش */
+      direction: rtl;
+      text-align: center;
+      font-family: 'Cairo', sans-serif; /* تحديد خط كيرو الصحيح */
+      padding-top: 50px; /* زيادة المسافة العلوية لجعل المحتوى يظهر أسفل */
+      font-size: 12px; /* تصغير حجم الخط العام في الصفحة */
+      padding-left: 3%; /* تقليص المسافة على الجنب الأيسر */
+      padding-right: 3%; /* تقليص المسافة على الجنب الأيمن */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* جعل محتوى الصفحة في المنتصف عموديًا وأفقيًا */
+    }
+
+    .btn-section {
+      font-size: 14px; /* تقليل حجم النص داخل الأزرار */
+      font-weight: bold; /* جعل النص بولد */
+      padding: 10px 25px; /* تقليل المسافة داخل الأزرار */
+      width: 100%; /* جعل الزر يأخذ كامل العرض المتاح داخل المربع */
+      border-radius: 15px;
+      transition: 0.3s; /* تأثير عند التمرير */
+      margin: 8px 0; /* تقليل المسافة بين الأزرار */
+    }
+
+    .btn-section:hover {
+      transform: scale(1.05); /* تكبير الزر قليلاً عند التمرير */
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* إضافة ظل عند التمرير */
+    }
+
+    /* تخصيص الألوان حسب القسم بألوان متناسقة */
+    .btn-primary { background-color: #4CAF50; border: none; }
+    .btn-primary:hover { background-color: #45a049; }
+
+    .btn-secondary { background-color: #FF9800; border: none; }
+    .btn-secondary:hover { background-color: #e68a00; }
+
+    .btn-warning { background-color: #03A9F4; border: none; color: black; }
+    .btn-warning:hover { background-color: #0288d1; }
+
+    .btn-info { background-color: #E91E63; border: none; }
+    .btn-info:hover { background-color: #d81b60; }
+
+    .btn-success { background-color: #9C27B0; border: none; }
+    .btn-success:hover { background-color: #8e24aa; }
+
+    .btn-danger { background-color: #F44336; border: none; }
+    .btn-danger:hover { background-color: #e53935; }
+
+    /* مربع شفاف يحتوي الأزرار */
+    .btn-container {
+      background-color: rgba(255, 255, 255, 0.3); /* شفافية بنسبة 30% */
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 500px; /* زيادة العرض الأقصى للمربع */
+      width: 100%; /* جعل المربع يأخذ كامل العرض */
+      margin-top: -50px; /* رفع المربع أكثر */
+      border: 3px solid #4CAF50; /* إضافة إطار أخضر */
+      box-shadow: 0px 0px 10px #4CAF50; /* إضافة تأثير الضوء الأخضر */
+    }
+
+    /* شريط التمرير في الأسفل */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #388E3C; /* جعل الشريط أغمق */
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 14px; /* تقليل حجم الخط في الشريط */
+      font-family: 'Cairo', sans-serif;
+      overflow: hidden; /* لمنع النص من الخروج */
+    }
+
+    .scrolling-text {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-right 30s linear infinite; /* جعل الحركة أبطأ */
+    }
+
+    /* حركة النص من اليسار لليمين */
+    @keyframes scroll-right {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="btn-container">
+<h1 class="text-center text-primary" style="margin-bottom: 30px;">مكتبات كلية التربية النوعية</h1>
+<a href="/tech" class="btn btn-section custom-green">📘 قسم تكنولوجيا التعليم</a>
+<a href="/media" class="btn btn-section custom-green">🎥 قسم الإعلام التربوي</a>
+<a href="/art_education" class="btn btn-section custom-green">🎨 قسم التربية الفنية</a>
+<a href="/homeeconomics" class="btn btn-section custom-green">🍽️ قسم الاقتصاد المنزلي</a>
+<a href="/musical" class="btn btn-section custom-green">🎶 قسم التربية الموسيقية</a>
+<a href="/postgraduate" class="btn btn-section custom-green">🎓 مكتبة الدراسات العليا</a>
+<a href="/login" class="btn btn-section btn-danger mt-2">🔐 تسجيل الدخول</a>
+
+<style>
+  .custom-green {
+    background-color: #28a745; /* أخضر */
+    color: white; /* لون الخط أبيض */
+    border: none;
+  }
+
+  .custom-green:hover {
+    background-color: #218838; /* أخضر غامق عند التمرير */
+  }
+</style>
+
+  </div>
+
+  <!-- شريط التمرير في الأسفل -->
+  <div class="footer">
+    <div class="scrolling-text">
+      تم إنشاء هذا الموقع بواسطة مجموعة من طلاب الفرقة الرابعة بكلية التربية النوعية قسم تكنولوجيا التعليم والحاسب الآلي كمشروع تخرج تحت إشراف أ.م.د أشرف البرادعي - نتمنى لكم التوفيق
+    </div>
+  </div>
+
+</body>
+</html>
