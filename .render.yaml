@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: liberary
+    env: python
+    buildCommand: poetry install
+    startCommand: gunicorn app:app
