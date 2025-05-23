@@ -1,44 +1,16 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: 13 مايو 2025 الساعة 09:59
--- إصدار الخادم: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Step 1: rollback any open transaction and clear error state
+ROLLBACK;
+BEGIN;
+-- Step 2: Create table admin
+CREATE TABLE admin (
+  id SERIAL PRIMARY KEY,
+  username varchar(50) NOT NULL,
+  password varchar(100) NOT NULL,
+  section varchar(100) NOT NULL
+);
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `your_database_name`
---
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `admin`
---
-
-CREATE TABLE `admin` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `section` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `admin`
---
-
-INSERT INTO `admin` (`id`, `username`, `password`, `section`) VALUES
+-- Step 3: Insert data into admin
+INSERT INTO admin (id, username, password, section) VALUES
 (1, 'admin_tech', '1231', 'tech'),
 (2, 'admin_media', '1234', 'media'),
 (3, 'admin_art', '1234', 'art_education'),
@@ -46,54 +18,43 @@ INSERT INTO `admin` (`id`, `username`, `password`, `section`) VALUES
 (5, 'admin_music', '1234', 'musical'),
 (6, 'admin_postgrad', '1234', 'postgraduate');
 
--- --------------------------------------------------------
+-- Step 4: Create table artia
+CREATE TABLE artia (
+  id SERIAL PRIMARY KEY,
+  title varchar(100) NOT NULL,
+  author varchar(100) DEFAULT NULL,
+  year varchar(10) DEFAULT NULL,
+  category_number varchar(50) DEFAULT NULL,
+  shelf_location varchar(50) DEFAULT NULL,
+  book_number_on_shelf varchar(50) DEFAULT NULL,
+  publisher varchar(100) DEFAULT NULL,
+  is_borrowed smallint DEFAULT 0
+);
+
+-- Step 5: Insert data into artia
+INSERT INTO artia (id, title, author, year, category_number, shelf_location, book_number_on_shelf, publisher, is_borrowed) VALUES
+(1, '124rn', NULL, NULL, NULL, NULL, NULL, NULL, 0);
+
+CREATE TABLE book (
+  id SERIAL PRIMARY KEY,
+  title varchar(100) DEFAULT '',
+  author varchar(100) DEFAULT NULL,
+  year int DEFAULT NULL,
+  category_number varchar(20) NOT NULL,
+  shelf_location varchar(50) NOT NULL,
+  book_number_on_shelf int NOT NULL,
+  publisher varchar(100) NOT NULL,
+  is_borrowed smallint DEFAULT 0
+);
+
+-- You can add INSERT statements here for `book` if you have any
+ 
 
 --
--- بنية الجدول `artia`
+-- SQLINES DEMO *** بيانات الجدول `book`
 --
 
-CREATE TABLE `artia` (
-  `id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `author` varchar(100) DEFAULT NULL,
-  `year` varchar(10) DEFAULT NULL,
-  `category_number` varchar(50) DEFAULT NULL,
-  `shelf_location` varchar(50) DEFAULT NULL,
-  `book_number_on_shelf` varchar(50) DEFAULT NULL,
-  `publisher` varchar(100) DEFAULT NULL,
-  `is_borrowed` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `artia`
---
-
-INSERT INTO `artia` (`id`, `title`, `author`, `year`, `category_number`, `shelf_location`, `book_number_on_shelf`, `publisher`, `is_borrowed`) VALUES
-(1, '124\r\n', NULL, NULL, NULL, NULL, NULL, NULL, 0);
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `book`
---
-
-CREATE TABLE `book` (
-  `id` int(11) NOT NULL,
-  `title` varchar(100) DEFAULT '',
-  `author` varchar(100) DEFAULT NULL,
-  `year` int(11) DEFAULT NULL,
-  `category_number` varchar(20) NOT NULL,
-  `shelf_location` varchar(50) NOT NULL,
-  `book_number_on_shelf` int(11) NOT NULL,
-  `publisher` varchar(100) NOT NULL,
-  `is_borrowed` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `book`
---
-
-INSERT INTO `book` (`id`, `title`, `author`, `year`, `category_number`, `shelf_location`, `book_number_on_shelf`, `publisher`, `is_borrowed`) VALUES
+INSERT INTO book (id, title, author, year, category_number, shelf_location, book_number_on_shelf, publisher, is_borrowed) VALUES
 (1, 'محمو امية الكمبيوتر ', 'سامي كاظم الرماحي ', 1990, '1 تك ', 'دولاب A الرف الاول ', 1, 'دار الراتب الجامعية ', 0),
 (12, 'موسوعة مصطلاحات الكمبيوتر', 'محمود الشريف عبدالرحمن', 1995, '2 تك', 'دولاب A الرف الاول', 2, 'المكتبة الاكاديمية', 1),
 (13, 'المكتبات و المعلومات بالمدارس والكليات', 'سعد محمد الهجرسي', 1993, '3 تك', 'دولاب A الرف الاول', 3, 'دار المصرية البنانية', 0),
@@ -511,7 +472,7 @@ INSERT INTO `book` (`id`, `title`, `author`, `year`, `category_number`, `shelf_l
 (443, 'كل ما يحتاجة المبرمجون بلغة البيسك', 'شهيد عبد الحميد عمر', 1992, '415 تك', 'دولاب B الرف الاول', 9, 'شركة فالكون للدعاية', 0),
 (444, 'كل ما يحتاجة المبرمجون بلغة البيسك', 'شهيد عبد الحميد عمر', 1992, '416 تك', 'دولاب B الرف الاول', 10, 'شركة فالكون للدعاية', 0),
 (445, 'الرياضيات الأساسية للحاسبات', 'سيمور ليبشتر', 1983, '417 تك', 'دولاب B الرف الاول', 11, 'دار ماكجروهيل للنشر', 0);
-INSERT INTO `book` (`id`, `title`, `author`, `year`, `category_number`, `shelf_location`, `book_number_on_shelf`, `publisher`, `is_borrowed`) VALUES
+INSERT INTO book (id, title, author, year, category_number, shelf_location, book_number_on_shelf, publisher, is_borrowed) VALUES
 (446, 'مبادئ الرقمية. توكهيم', 'روجدل. توكهيم', 1984, '418 تك', 'دولاب B الرف الاول', 12, 'دار ماكجروهيل للنشر', 0),
 (447, 'البرمجة بلغة اللبيسك', 'بايرون .س جوتفريد', 1993, '419 تك', 'دولاب B الرف الاول', 13, 'الدار الدولية للنشر', 0),
 (448, 'البرمجة بلغة البسكال', 'بايرون س. جوتفريد', 1993, '420 تك', 'دولاب B الرف الاول', 14, 'دار الدولية للنشر', 0),
@@ -936,7 +897,7 @@ INSERT INTO `book` (`id`, `title`, `author`, `year`, `category_number`, `shelf_l
 (868, 'التصنيف في المكتبات العربية', 'ناصر محمد السويدان', 1982, '840 تك', 'دولاب c الرف الرابع', 5, 'دار المريخ', 0),
 (869, 'المكتبات المدرسية', 'حسن محمد عبدالشافي', 1990, '841 تك', 'دولاب c الرف الرابع', 6, 'دار الكتاب المصري', 0),
 (870, 'مراكز المعلومات', 'بولين اثرتون', NULL, '842 تك', 'دولاب c الرف الرابع', 7, 'مكتبة غريب', 0);
-INSERT INTO `book` (`id`, `title`, `author`, `year`, `category_number`, `shelf_location`, `book_number_on_shelf`, `publisher`, `is_borrowed`) VALUES
+INSERT INTO book (id, title, author, year, category_number, shelf_location, book_number_on_shelf, publisher, is_borrowed) VALUES
 (871, 'دراسات في المكتبات والمعلومات', 'محمد فتحي عبدالهادي', 1988, '843 تك', 'دولاب c الرف الرابع', 8, 'دار المريخ', 0),
 (872, 'علم المكتبات', 'عبدالله انيس', NULL, '844 تك', 'دولاب c الرف الرابع', 9, 'دار الكتاب اللبناني', 0),
 (873, 'المكانز كادوات للتكشيف واسترجاع', 'محمد فتحي عبدالهادي', 1989, '845 تك', 'دولاب c الرف الرابع', 10, 'مكتبة غريب', 0),
@@ -1105,232 +1066,89 @@ INSERT INTO `book` (`id`, `title`, `author`, `year`, `category_number`, `shelf_l
 (1040, 'محمد شرف س', 'محمد فتحي عبدالهادي ', 1200, '1010 تك ', 'دولاب c الرف الثالث ', 33, 'مكتبة ابن سينا ', 0),
 (1041, 'شررررف', 'محمد فتحي عبدالهادي ', 1200, '202202020', 'دولاب A الرف الاول ', 7, 'مكتبة ابن سينا ', 0);
 
--- --------------------------------------------------------
+-- SQLINES DEMO *** ---------------------------------------
 
 --
--- بنية الجدول `educational_media`
+-- SQLINES DEMO *** ational_media`
 --
+-- Create tables without AUTO_INCREMENT or MODIFY (handle auto-increment with SERIAL or sequences)
+CREATE TABLE educational_media (
+  id SERIAL PRIMARY KEY,  -- use SERIAL to auto-increment id
+  title varchar(100) NOT NULL,
+  author varchar(100) DEFAULT NULL,
+  year varchar(10) DEFAULT NULL,
+  category_number varchar(50) DEFAULT NULL,
+  shelf_location varchar(50) DEFAULT NULL,
+  book_number_on_shelf varchar(50) DEFAULT NULL,
+  publisher varchar(100) DEFAULT NULL,
+  is_borrowed smallint DEFAULT 0
+);
 
-CREATE TABLE `educational_media` (
-  `id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `author` varchar(100) DEFAULT NULL,
-  `year` varchar(10) DEFAULT NULL,
-  `category_number` varchar(50) DEFAULT NULL,
-  `shelf_location` varchar(50) DEFAULT NULL,
-  `book_number_on_shelf` varchar(50) DEFAULT NULL,
-  `publisher` varchar(100) DEFAULT NULL,
-  `is_borrowed` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `educational_media`
---
-
-INSERT INTO `educational_media` (`id`, `title`, `author`, `year`, `category_number`, `shelf_location`, `book_number_on_shelf`, `publisher`, `is_borrowed`) VALUES
+INSERT INTO educational_media (id, title, author, year, category_number, shelf_location, book_number_on_shelf, publisher, is_borrowed) VALUES
 (8, '22', 'شعبان عبدالعزيز خليفة', '1200', '7 تك', 'دولاب B الرف الاول', '2', 'الدار العربية للعلوم ', 0);
 
--- --------------------------------------------------------
+CREATE TABLE home_economics (
+  id SERIAL PRIMARY KEY,
+  title varchar(100) NOT NULL,
+  author varchar(100) DEFAULT NULL,
+  year varchar(10) DEFAULT NULL,
+  category_number varchar(50) DEFAULT NULL,
+  shelf_location varchar(50) DEFAULT NULL,
+  book_number_on_shelf varchar(50) DEFAULT NULL,
+  publisher varchar(100) DEFAULT NULL,
+  is_borrowed smallint DEFAULT 0
+);
 
---
--- بنية الجدول `home_economics`
---
-
-CREATE TABLE `home_economics` (
-  `id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `author` varchar(100) DEFAULT NULL,
-  `year` varchar(10) DEFAULT NULL,
-  `category_number` varchar(50) DEFAULT NULL,
-  `shelf_location` varchar(50) DEFAULT NULL,
-  `book_number_on_shelf` varchar(50) DEFAULT NULL,
-  `publisher` varchar(100) DEFAULT NULL,
-  `is_borrowed` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `home_economics`
---
-
-INSERT INTO `home_economics` (`id`, `title`, `author`, `year`, `category_number`, `shelf_location`, `book_number_on_shelf`, `publisher`, `is_borrowed`) VALUES
+INSERT INTO home_economics (id, title, author, year, category_number, shelf_location, book_number_on_shelf, publisher, is_borrowed) VALUES
 (1, 'عبده', NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
--- --------------------------------------------------------
+CREATE TABLE musical_education_media (
+  id SERIAL PRIMARY KEY,
+  title varchar(100) NOT NULL,
+  author varchar(100) DEFAULT NULL,
+  year varchar(10) DEFAULT NULL,
+  category_number varchar(50) DEFAULT NULL,
+  shelf_location varchar(50) DEFAULT NULL,
+  book_number_on_shelf varchar(50) DEFAULT NULL,
+  publisher varchar(100) DEFAULT NULL,
+  is_borrowed smallint DEFAULT 0
+);
 
---
--- بنية الجدول `musical_education_media`
---
-
-CREATE TABLE `musical_education_media` (
-  `id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `author` varchar(100) DEFAULT NULL,
-  `year` varchar(10) DEFAULT NULL,
-  `category_number` varchar(50) DEFAULT NULL,
-  `shelf_location` varchar(50) DEFAULT NULL,
-  `book_number_on_shelf` varchar(50) DEFAULT NULL,
-  `publisher` varchar(100) DEFAULT NULL,
-  `is_borrowed` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `musical_education_media`
---
-
-INSERT INTO `musical_education_media` (`id`, `title`, `author`, `year`, `category_number`, `shelf_location`, `book_number_on_shelf`, `publisher`, `is_borrowed`) VALUES
+INSERT INTO musical_education_media (id, title, author, year, category_number, shelf_location, book_number_on_shelf, publisher, is_borrowed) VALUES
 (1, '11', NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
--- --------------------------------------------------------
+CREATE TABLE post_graduate_library (
+  id SERIAL PRIMARY KEY,
+  title varchar(100) NOT NULL,
+  author varchar(100) DEFAULT NULL,
+  year varchar(10) DEFAULT NULL,
+  category_number varchar(50) DEFAULT NULL,
+  shelf_location varchar(50) DEFAULT NULL,
+  book_number_on_shelf varchar(50) DEFAULT NULL,
+  publisher varchar(100) DEFAULT NULL,
+  is_borrowed smallint DEFAULT 0
+);
 
---
--- بنية الجدول `post_graduate_library`
---
+INSERT INTO post_graduate_library (id, title, author, year, category_number, shelf_location, book_number_on_shelf, publisher, is_borrowed) VALUES
+(1, 'شرف 1', NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
-CREATE TABLE `post_graduate_library` (
-  `id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `author` varchar(100) DEFAULT NULL,
-  `year` varchar(10) DEFAULT NULL,
-  `category_number` varchar(50) DEFAULT NULL,
-  `shelf_location` varchar(50) DEFAULT NULL,
-  `book_number_on_shelf` varchar(50) DEFAULT NULL,
-  `publisher` varchar(100) DEFAULT NULL,
-  `is_borrowed` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE super_admins (
+  id SERIAL PRIMARY KEY,
+  username varchar(50) NOT NULL UNIQUE,  -- Added UNIQUE here
+  password varchar(255) NOT NULL
+);
 
---
--- إرجاع أو استيراد بيانات الجدول `post_graduate_library`
---
-
-INSERT INTO `post_graduate_library` (`id`, `title`, `author`, `year`, `category_number`, `shelf_location`, `book_number_on_shelf`, `publisher`, `is_borrowed`) VALUES
-(1, 'شرف 1', 'None', 'None', 'None', 'None', 'None', 'None', 0);
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `super_admins`
---
-
-CREATE TABLE `super_admins` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `super_admins`
---
-
-INSERT INTO `super_admins` (`id`, `username`, `password`) VALUES
+INSERT INTO super_admins (id, username, password) VALUES
 (1, 'SHARAF', '1234');
 
---
--- Indexes for dumped tables
---
+-- No ALTER TABLE needed for primary keys or unique constraints as they're in the CREATE TABLE now
 
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
+-- If you want to set sequence values (like MySQL AUTO_INCREMENT counters), do:
 
---
--- Indexes for table `artia`
---
-ALTER TABLE `artia`
-  ADD PRIMARY KEY (`id`);
+SELECT setval(pg_get_serial_sequence('educational_media', 'id'), 10, false);
+SELECT setval(pg_get_serial_sequence('home_economics', 'id'), 2, false);
+SELECT setval(pg_get_serial_sequence('musical_education_media', 'id'), 2, false);
+SELECT setval(pg_get_serial_sequence('post_graduate_library', 'id'), 2, false);
+SELECT setval(pg_get_serial_sequence('super_admins', 'id'), 3, false);
 
---
--- Indexes for table `book`
---
-ALTER TABLE `book`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `educational_media`
---
-ALTER TABLE `educational_media`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `home_economics`
---
-ALTER TABLE `home_economics`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `musical_education_media`
---
-ALTER TABLE `musical_education_media`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `post_graduate_library`
---
-ALTER TABLE `post_graduate_library`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `super_admins`
---
-ALTER TABLE `super_admins`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT for table `artia`
---
-ALTER TABLE `artia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `book`
---
-ALTER TABLE `book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1045;
-
---
--- AUTO_INCREMENT for table `educational_media`
---
-ALTER TABLE `educational_media`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `home_economics`
---
-ALTER TABLE `home_economics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `musical_education_media`
---
-ALTER TABLE `musical_education_media`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `post_graduate_library`
---
-ALTER TABLE `post_graduate_library`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `super_admins`
---
-ALTER TABLE `super_admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
