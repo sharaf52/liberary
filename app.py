@@ -1,20 +1,19 @@
 
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
 from datetime import datetime
+
+
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
   
 
 # Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+pg8000://sql7780831:J9iQx2f7V5@sql7.freesqldatabase.com:3306/sql7780831'
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://sql7780831:J9iQx2f7V5@sql7.freesqldatabase.com:3306/sql7780831'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-
 db = SQLAlchemy(app) 
 
 class SupportAdmin(db.Model):
