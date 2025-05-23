@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 
 # Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://liberary:SHsharaf1234567@liberary.mysql.pythonanywhere-services.com/your_database_name'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///books.db'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
