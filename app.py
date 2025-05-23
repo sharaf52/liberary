@@ -10,12 +10,12 @@ app.secret_key = 'your_secret_key_here'
   
 
 # Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://librarysdb_user:I1FCS3WWae7KSZ8rEvyxITw7gCW6Otey@dpg-d0o9v8mmcj7s73e9usvg-a/librarysdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+pg8000://sql7780831:J9iQx2f7V5@sql7.freesqldatabase.com:3306/sql7780831'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+db = SQLAlchemy(app) 
 
 class SupportAdmin(db.Model):
     __tablename__ = 'super_admins'  # اسم الجدول في قاعدة البيانات
