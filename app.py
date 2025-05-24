@@ -110,6 +110,10 @@ with app.app_context():
 def home():
     return render_template('index.html')
 
+@app.route('/team')
+def team():
+    return render_template('team.html')  # أو أي صفحة HTML عندك
+
 @app.route('/tech')
 def tech_section():
     query = request.args.get('query', '').strip()
